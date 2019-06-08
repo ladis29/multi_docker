@@ -4,10 +4,10 @@ services:
   - docker
 
 before_install:
-  - docker build -e CI=true -t ladis29/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t ladis29/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run ladis29/react-test npm test -- --coverage
+  - docker run -e CI=true ladis29/react-test npm test -- --coverage
 
 after_success:
   - docker build -t ladis29/multi-client ./client
