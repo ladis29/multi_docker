@@ -1,0 +1,36 @@
+{
+    "AWSEBSockerrunVersion": 2,
+    "containerDefinitions": [
+        {
+           "name": "client",
+           "image": "ladis29/multi-client",
+           "hostname": "client",
+           "essential": false
+        },
+        {
+            "name": "server",
+            "image": "ladis29/multi-server",
+            "hostname": "api",
+            "essential": false
+         },
+         {
+            "name": "worker",
+            "image": "ladis29/multi-worker",
+            "hostname": "worker",
+            "essential": false
+         },
+         {
+            "name": "nginx",
+            "image": "ladis29/multi-nginx",
+            "hostname": "nginx",
+            "essential": true,
+            "portMappings": [
+                {
+                    "hostPort": 80,
+                    "containerPort": 80
+                }
+            ],
+            "links": ["client", "server"]
+         }
+    ]
+}
